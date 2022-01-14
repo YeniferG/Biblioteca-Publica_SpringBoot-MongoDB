@@ -14,6 +14,8 @@ public class RecursoDTO {
     private Tipo tipo;
     private Area area;
 
+    public RecursoDTO(){}
+
     public RecursoDTO(String nombre, Tipo tipo, Area area) {
         this.nombre = nombre;
         this.tipo = tipo;
