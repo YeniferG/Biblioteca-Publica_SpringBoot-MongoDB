@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/recursos")
@@ -54,18 +52,17 @@ public class ControladorRecurso {
 
     @GetMapping("/filtrarAreaYTipo")
     public ResponseEntity<RecursoDTO> mostrarDisponibilidd(@RequestBody Filtro filtro) {
-        return new ResponseEntity(servicioRecurso.obtenerPorAreaTematicaYTipo(filtro.getArea(), filtro.getTipo()), HttpStatus.OK);
+        return new ResponseEntity(servicioRecurso.obtenerPorAreaTematicaYTipo(filtro.getAreaTematica(), filtro.getTipo()), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable("id") String id) {
+    @DeleteMapping("/borrar/{id}")
+    public ResponseEntity delete(@PathVariable("id") String id){
         try {
             servicioRecurso.eliminarPorId(id);
             return new ResponseEntity(HttpStatus.OK);
-        } catch (Exception e) {
+        } catch (Exception e){
             System.out.println(e.getMessage());
             return new ResponseEntity(HttpStatus.NOT_FOUND);
         }
     }
-
 }

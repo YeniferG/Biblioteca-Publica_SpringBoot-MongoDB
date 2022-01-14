@@ -16,7 +16,6 @@ public class ServicioRecurso {
 
     @Autowired
     RepositorioRecurso repositorioRecurso;
-
     RecursoMapper recursoMapper = new RecursoMapper();
 
     public RecursoDTO crear(RecursoDTO recursoDTO){
@@ -24,13 +23,13 @@ public class ServicioRecurso {
         return recursoMapper.fromCollection(repositorioRecurso.save(recurso));
     }
 
-    public List<RecursoDTO> obtenerTodos(){
-        List<Recurso> recursos = (List<Recurso>) repositorioRecurso.findAll();
-        return recursoMapper.fromCollectionList(recursos);
+    public List<RecursoDTO> obtenerTodos() {
+        List<Recurso> recurso = repositorioRecurso.findAll();
+        return recursoMapper.fromCollectionList(recurso);
     }
 
     public RecursoDTO obtenerPorId(String id){
-        Recurso recurso = repositorioRecurso.findById(id).orElseThrow(() -> new RuntimeException("El recurso no existe"));
+        Recurso recurso = repositorioRecurso.findById(id).orElseThrow(() -> new RuntimeException("Recurso no encontrado"));
         return recursoMapper.fromCollection(recurso);
     }
 
@@ -39,7 +38,7 @@ public class ServicioRecurso {
         return recursoMapper.fromCollection(repositorioRecurso.save(recurso));
     }
 
-    public void eliminarPorId(String id){
+    public void eliminarPorId(String id) {
         repositorioRecurso.deleteById(id);
     }
 
@@ -52,13 +51,12 @@ public class ServicioRecurso {
         RecursoDTO recursoDTO = obtenerPorId(id);
         Mensaje mensaje = new Mensaje().imprimirMensajePrestamo(recursoDTO.isDisponible(), recursoDTO.getFechaPrestamo());
 
-        if(recursoDTO.isDisponible()){
+        if (recursoDTO.isDisponible()){
             recursoDTO.setDisponible(false);
             recursoDTO.setFechaPrestamo(new Date());
             Recurso recurso = recursoMapper.fromDTO(recursoDTO);
             recursoMapper.fromCollection(repositorioRecurso.save(recurso));
         }
-
         return mensaje;
     }
 
@@ -89,5 +87,4 @@ public class ServicioRecurso {
         List<Recurso> recursos = repositorioRecurso.findByAreaTematicaAndTipo(area, tipo);
         return recursoMapper.fromCollectionList(recursos);
     }
-
 }

@@ -27,7 +27,7 @@ class ServicioRecursoTest {
     private ServicioRecurso servicioRecurso;
 
     @Test
-    void comprobarDisponibilidad() {
+    void disponibilidadRecurso() {
         var recurso = new Recurso(
                 "123",
                 "Fisica II",
@@ -45,7 +45,7 @@ class ServicioRecursoTest {
     }
 
     @Test
-    void buscarPorTipo() {
+    void obtenerPorTipo() {
         var recursos = List.of( new Recurso(
                 "765",
                 "Conquista de America",
@@ -59,13 +59,13 @@ class ServicioRecursoTest {
         Assertions.assertEquals(1, resultado.size());
         Assertions.assertEquals("Conquista de America" , resultado.get(0).getNombre());
         Assertions.assertEquals(Tipo.LIBRO , resultado.get(0).getTipo());
-        Assertions.assertEquals(AreaTematica.HISTORIA, resultado.get(0).getArea());
+        Assertions.assertEquals(AreaTematica.HISTORIA, resultado.get(0).getAreaTematica());
 
         Mockito.verify(repositorioRecurso, Mockito.times(1)).findByTipo("LIBRO");
     }
 
     @Test
-    void buscarPorArea() {
+    void obtenerPorAreaTematica() {
         var recursos = List.of( new Recurso(
                 "xxxx",
                 "La Fotosintesis",
@@ -79,13 +79,13 @@ class ServicioRecursoTest {
         Assertions.assertEquals(1, resultado.size());
         Assertions.assertEquals("La Fotosintesis" , resultado.get(0).getNombre());
         Assertions.assertEquals(Tipo.DOCUMENTAL , resultado.get(0).getTipo());
-        Assertions.assertEquals(AreaTematica.CIENCIAS, resultado.get(0).getArea());
+        Assertions.assertEquals(AreaTematica.CIENCIAS, resultado.get(0).getAreaTematica());
 
         Mockito.verify(repositorioRecurso, Mockito.times(1)).findByAreaTematica("CIENCIAS");
     }
 
     @Test
-    void buscarPorAreaYTipo() {
+    void obtenerPorAreaTematicaYTipo() {
 
         var recursos = List.of( new Recurso(
                 "M-1234",
@@ -101,7 +101,7 @@ class ServicioRecursoTest {
         Assertions.assertEquals(1, resultado.size());
         Assertions.assertEquals("Algebra Lineal" , resultado.get(0).getNombre());
         Assertions.assertEquals(Tipo.LIBRO , resultado.get(0).getTipo());
-        Assertions.assertEquals(AreaTematica.MATEMATICAS, resultado.get(0).getArea());
+        Assertions.assertEquals(AreaTematica.MATEMATICAS, resultado.get(0).getAreaTematica());
 
         Mockito.verify(repositorioRecurso, Mockito.times(1)).findByAreaTematicaAndTipo("MATEMATICAS", "LIBRO");
     }

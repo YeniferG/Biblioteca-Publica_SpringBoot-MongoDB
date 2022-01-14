@@ -12,14 +12,14 @@ public class RecursoDTO {
     private boolean isDisponible = true;
     private Date fechaPrestamo;
     private Tipo tipo;
-    private AreaTematica area;
+    private AreaTematica areaTematica;
 
     public RecursoDTO(){}
 
-    public RecursoDTO(String nombre, Tipo tipo, AreaTematica area) {
+    public RecursoDTO(String nombre, Tipo tipo, AreaTematica areaTematica) {
         this.nombre = nombre;
         this.tipo = tipo;
-        this.area = area;
+        this.areaTematica = areaTematica;
     }
 
     public String getId() {
@@ -62,11 +62,11 @@ public class RecursoDTO {
         this.tipo = tipo;
     }
 
-    public AreaTematica getArea() {
-        return area;
+    public AreaTematica getAreaTematica() {
+        return areaTematica;
     }
 
-    public void setArea(AreaTematica area) {
-        this.area = area;
+    public void setAreaTematica(AreaTematica areaTematica) {
+        this.areaTematica = areaTematica;
     }
 }

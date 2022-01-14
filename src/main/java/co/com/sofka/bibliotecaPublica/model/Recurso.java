@@ -16,22 +16,22 @@ public class Recurso {
     private boolean isDisponible = true;
     private Date fechaPrestamo;
     private Tipo tipo;
-    private AreaTematica area;
+    private AreaTematica areaTematica;
 
 
     public Recurso(){}
 
-    public Recurso(String id, String nombre, Tipo tipo, AreaTematica area) {
+    public Recurso(String id, String nombre, Tipo tipo, AreaTematica areaTematica) {
         this.id = id;
         this.nombre = nombre;
         this.tipo = tipo;
-        this.area = area;
+        this.areaTematica = areaTematica;
     }
 
     public Recurso(String nombre, Tipo tipo, AreaTematica area) {
         this.nombre = nombre;
         this.tipo = tipo;
-        this.area = area;
+        this.areaTematica = area;
     }
 
     public String getId() {
@@ -74,11 +74,11 @@ public class Recurso {
         this.tipo = tipo;
     }
 
-    public AreaTematica getArea() {
-        return area;
+    public AreaTematica getAreaTematica() {
+        return areaTematica;
     }
 
-    public void setArea(AreaTematica area) {
-        this.area = area;
+    public void setAreaTematica(AreaTematica areaTematica) {
+        this.areaTematica = areaTematica;
     }
 }

@@ -8,6 +8,7 @@ public enum AreaTematica {
     GEOGRAFIA,
     HISTORIA,
     ARTES,
+    FANTASIA,
     FISICA,
     INGLES,
     LITERATURA

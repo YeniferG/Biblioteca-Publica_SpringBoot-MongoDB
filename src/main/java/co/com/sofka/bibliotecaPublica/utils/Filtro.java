@@ -3,14 +3,13 @@ package co.com.sofka.bibliotecaPublica.utils;
 public class Filtro {
 
     private String tipo;
-    private String area;
+    private String areaTematica;
 
     public String getTipo() {
         return tipo;
     }
 
-    public String getArea() {
-        return area;
+    public String getAreaTematica() {
+        return areaTematica;
     }
-
 }
