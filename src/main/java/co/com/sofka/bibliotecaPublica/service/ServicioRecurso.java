@@ -4,7 +4,7 @@ import co.com.sofka.bibliotecaPublica.dto.RecursoDTO;
 import co.com.sofka.bibliotecaPublica.mapper.RecursoMapper;
 import co.com.sofka.bibliotecaPublica.model.Recurso;
 import co.com.sofka.bibliotecaPublica.repository.RepositorioRecurso;
-import co.com.sofka.bibliotecaPublica.utils.MensajeDisponibilidad;
+import co.com.sofka.bibliotecaPublica.utils.Mensaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -43,9 +43,38 @@ public class ServicioRecurso {
         repositorioRecurso.deleteById(id);
     }
 
-    public MensajeDisponibilidad disponibilidadRecurso(String id){
+    public Mensaje disponibilidadRecurso(String id){
         RecursoDTO recursoDTO = obtenerPorId(id);
-        return new MensajeDisponibilidad().imprimirMensajeDisponibilidad(recursoDTO.isDisponible(), recursoDTO.getFechaPrestamo());
+        return new Mensaje().imprimirMensajeDisponibilidad(recursoDTO.isDisponible(), recursoDTO.getFechaPrestamo());
     }
+
+    public Mensaje prestarRecurso(String id){
+        RecursoDTO recursoDTO = obtenerPorId(id);
+        Mensaje mensaje = new Mensaje().imprimirMensajePrestamo(recursoDTO.isDisponible(), recursoDTO.getFechaPrestamo());
+
+        if(recursoDTO.isDisponible()){
+            recursoDTO.setDisponible(false);
+            recursoDTO.setFechaPrestamo(new Date());
+            Recurso recurso = recursoMapper.fromDTO(recursoDTO);
+            recursoMapper.fromCollection(repositorioRecurso.save(recurso));
+        }
+
+        return mensaje;
+    }
+
+    public Mensaje devolverRecurso(String id){
+        RecursoDTO recursoDTO = obtenerPorId(id);
+        Mensaje mensaje = new Mensaje().imprimirMensajeDevolucion(recursoDTO.isDisponible(), recursoDTO.getFechaPrestamo());
+
+        if (!recursoDTO.isDisponible()){
+            recursoDTO.setDisponible(true);
+            recursoDTO.setFechaPrestamo(null);
+            Recurso recurso = recursoMapper.fromDTO(recursoDTO);
+            recursoMapper.fromCollection(repositorioRecurso.save(recurso));
+        }
+        return mensaje;
+    }
+
+
 
 }

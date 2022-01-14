@@ -1,6 +1,6 @@
 package co.com.sofka.bibliotecaPublica.dto;
 
-import co.com.sofka.bibliotecaPublica.utils.Area;
+import co.com.sofka.bibliotecaPublica.utils.AreaTematica;
 import co.com.sofka.bibliotecaPublica.utils.Tipo;
 
 import java.util.Date;
@@ -12,11 +12,11 @@ public class RecursoDTO {
     private boolean isDisponible = true;
     private Date fechaPrestamo;
     private Tipo tipo;
-    private Area area;
+    private AreaTematica area;
 
     public RecursoDTO(){}
 
-    public RecursoDTO(String nombre, Tipo tipo, Area area) {
+    public RecursoDTO(String nombre, Tipo tipo, AreaTematica area) {
         this.nombre = nombre;
         this.tipo = tipo;
         this.area = area;
@@ -62,11 +62,11 @@ public class RecursoDTO {
         this.tipo = tipo;
     }
 
-    public Area getArea() {
+    public AreaTematica getArea() {
         return area;
     }
 
-    public void setArea(Area area) {
+    public void setArea(AreaTematica area) {
         this.area = area;
     }
 }

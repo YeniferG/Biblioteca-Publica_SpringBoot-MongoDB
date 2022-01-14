@@ -1,6 +1,6 @@
 package co.com.sofka.bibliotecaPublica.utils;
 
-public enum Area {
+public enum AreaTematica {
 
     MATEMATICAS,
     CIENCIAS,
