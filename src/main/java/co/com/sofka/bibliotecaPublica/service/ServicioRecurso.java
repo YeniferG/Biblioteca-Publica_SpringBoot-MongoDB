@@ -8,6 +8,7 @@ import co.com.sofka.bibliotecaPublica.utils.Mensaje;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -75,6 +76,19 @@ public class ServicioRecurso {
         return mensaje;
     }
 
+    public List<RecursoDTO> obtenerPorAreaTematica(String area){
+        List<Recurso> recursos = repositorioRecurso.findByAreaTematica(area);
+        return recursoMapper.fromCollectionList(recursos);
+    }
 
+    public List<RecursoDTO> obtenerPorTipo(String tipo){
+        List<Recurso> recursos = repositorioRecurso.findByTipo(tipo);
+        return recursoMapper.fromCollectionList(recursos);
+    }
+
+    public List<RecursoDTO> obtenerPorAreaTematicaYTipo(String area, String tipo){
+        List<Recurso> recursos = repositorioRecurso.findByAreaTematicaAndTipo(area, tipo);
+        return recursoMapper.fromCollectionList(recursos);
+    }
 
 }
