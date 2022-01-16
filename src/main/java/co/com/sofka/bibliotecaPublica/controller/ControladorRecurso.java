@@ -16,27 +16,38 @@ public class ControladorRecurso {
     ServicioRecurso servicioRecurso;
 
     @PostMapping("/crear")
-    public ResponseEntity<RecursoDTO> create(@RequestBody RecursoDTO recursoDTO) {
+    public ResponseEntity<RecursoDTO> crearRecurso(@RequestBody RecursoDTO recursoDTO) {
         return new ResponseEntity(servicioRecurso.crear(recursoDTO), HttpStatus.CREATED);
     }
 
     @GetMapping("/disponibilidad/{id}")
-    public ResponseEntity<RecursoDTO> mostrarDisponibilidad(@PathVariable("id") String id) {
+    public ResponseEntity<RecursoDTO> mostrarDisponibilidadPorId(@PathVariable("id") String id) {
         return new ResponseEntity(servicioRecurso.disponibilidadRecurso(id), HttpStatus.OK);
     }
 
     @GetMapping("")
-    public ResponseEntity<RecursoDTO> mostrarRecursos() {
+    public ResponseEntity<RecursoDTO> obtenerRecursos() {
         return new ResponseEntity(servicioRecurso.obtenerTodos(), HttpStatus.OK);
     }
 
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity eliminarRecursoPorId(@PathVariable("id") String id){
+        try {
+            servicioRecurso.eliminarPorId(id);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+            return new ResponseEntity(HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PutMapping("/prestar/{id}")
-    public ResponseEntity<RecursoDTO> prestar(@PathVariable String id) {
+    public ResponseEntity<RecursoDTO> prestarRecurso(@PathVariable String id) {
         return new ResponseEntity(servicioRecurso.prestarRecurso(id), HttpStatus.OK);
 
     }
     @PutMapping("/devolver/{id}")
-    public ResponseEntity<RecursoDTO> devolver(@PathVariable String id) {
+    public ResponseEntity<RecursoDTO> devolverRecurso(@PathVariable String id) {
         return new ResponseEntity(servicioRecurso.devolverRecurso(id), HttpStatus.OK);
     }
 
@@ -46,23 +57,12 @@ public class ControladorRecurso {
     }
 
     @GetMapping("/filtrarTipo/{tipo}")
-    public ResponseEntity<RecursoDTO> mostrarDisponibilida(@PathVariable String tipo) {
+    public ResponseEntity<RecursoDTO> filtarTipo(@PathVariable String tipo) {
         return new ResponseEntity(servicioRecurso.obtenerPorTipo(tipo), HttpStatus.OK);
     }
 
     @GetMapping("/filtrarAreaYTipo")
-    public ResponseEntity<RecursoDTO> mostrarDisponibilidd(@RequestBody Filtro filtro) {
+    public ResponseEntity<RecursoDTO> filtrarAreaYTipo(@RequestBody Filtro filtro) {
         return new ResponseEntity(servicioRecurso.obtenerPorAreaTematicaYTipo(filtro.getAreaTematica(), filtro.getTipo()), HttpStatus.OK);
-    }
-
-    @DeleteMapping("/borrar/{id}")
-    public ResponseEntity delete(@PathVariable("id") String id){
-        try {
-            servicioRecurso.eliminarPorId(id);
-            return new ResponseEntity(HttpStatus.OK);
-        } catch (Exception e){
-            System.out.println(e.getMessage());
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
-        }
     }
 }
